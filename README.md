@@ -5,8 +5,9 @@ Project was based off of the 'fftiers' program found on Github.
 
 
 ## Python
-Historical fantasy data pulled from: www.pro-football-reference.com which is parsed and written to local directory as csv files
-Output historical rankings data:
+Historical fantasy data pulled from: www.pro-football-reference.com which is parsed and written to local directory as csv files.
+
+Historical rankings data output:
 - Specific season years
 - Collection of recent past five seasons
 - Past five seasons split by player position
