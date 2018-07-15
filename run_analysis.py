@@ -1,7 +1,6 @@
 # -*- encoding: utf-8 -*-
-from ff_data_analysis.ingestor import ingest_data as ingest
-
-#from ff_data_analysis.generator import render_tiers as ren
+from ff_data_analysis.ingestor import ingest_historical_data as h
+from ff_data_analysis.ingestor import ingest_prediction_data as p
 import argparse
 
 
@@ -10,7 +9,7 @@ parser = argparse.ArgumentParser()
 args = parser.parse_args()
 
 
-#season_data = ingest.get_historical_rankings(2015)
-#historical_data = ingest.get_past_five_historical_rankings()
-#position_data = ingest.parse_by_player_position(historical_data)
-print(ingest.get_consensus_rankings())
+#season_data = h.get_historical_rankings(2015)
+#historical_data = h.get_past_five_historical_rankings()
+#position_data = h.parse_by_player_position(historical_data)
+df = p.get_consensus_rankings()

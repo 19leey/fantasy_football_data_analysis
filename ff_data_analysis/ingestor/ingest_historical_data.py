@@ -4,6 +4,9 @@ import datetime as dt
 import pandas as pd
 
 
+#TODO: rename and standardize columns
+#TODO: fix dtypes - unecessary floats
+
 # constants
 undesireable_columns = ['PPR', 'DKPt', 'FDPt', 'VBD', 'OvRank']
 
@@ -48,27 +51,15 @@ def get_past_five_historical_rankings():
 
 
 def parse_by_player_position(data_frame):
-    qb_data_frame = pd.DataFrame()
-    rb_data_frame = pd.DataFrame()
-    wr_data_frame = pd.DataFrame()
-    te_data_frame = pd.DataFrame()
-    for index, row in data_frame.iterrows():
-        if row['FantPos'] == 'QB':
-            qb_data_frame = qb_data_frame.append(row, ignore_index=True)
-        elif row['FantPos'] == 'RB':
-            rb_data_frame = rb_data_frame.append(row, ignore_index=True)
-        elif row['FantPos'] == 'WR':
-            wr_data_frame = wr_data_frame.append(row, ignore_index=True)
-        elif row['FantPos'] == 'TE':
-            te_data_frame = te_data_frame.append(row, ignore_index=True)
+    qb_data_frame = data_frame[data_frame.FantPos == 'QB']
+    rb_data_frame = data_frame[data_frame.FantPos == 'RB']
+    wr_data_frame = data_frame[data_frame.FantPos == 'WR']
+    te_data_frame = data_frame[data_frame.FantPos == 'TE']
+
     qb_data_frame = qb_data_frame[qb_columns].rename({'PosRank' : 'Rk'}, axis='columns')
     rb_data_frame = rb_data_frame[rb_columns].rename({'PosRank' : 'Rk'}, axis='columns')
     wr_data_frame = wr_data_frame[wr_te_columns].rename({'PosRank' : 'Rk'}, axis='columns')
     te_data_frame = te_data_frame[wr_te_columns].rename({'PosRank' : 'Rk'}, axis='columns')
     collection = {'QB' : qb_data_frame, 'RB' : rb_data_frame, 'WR' : wr_data_frame, 'TE' : te_data_frame}
-    #gen.write_position_rankings(data_frames)
+    #gen.write_position_rankings(collection)
     return collection
-
-
-def get_consensus_rankings():
-    return None
