@@ -1,15 +1,17 @@
 # Fantasy Football Data Analysis
-A Python script to scrape data from the web and clean and prepare for data analysis in R. This simple project is an introduction into R and how to use it for data analysis.
+A Python program to scrape data from the web which is cleaned to perform data analysis. This simple project is an introduction into the Python machine learning library scikit-learn as well as an introduction to R for data visualization.
+
+Project was based off of the 'fftiers' program found on Github.
 
 
-## Python Script
-Pulls data from the web into a pandas dataframe to be parsed for analysis.
-Parsing schemes:
-- By player position
-- By season year
-- By player name(s)
-- By rankings - overall and positional
+## Python
+Historical fantasy data pulled from: <www.pro-football-reference.com> which is parsed and written to local directory as csv files
+Output historical rankings data:
+- Specific season years
+- Collection of recent past five seasons
+- Past five seasons split by player position
 - ...
 
-## R Analytics
-idk yet
+
+## R
+nothing here yet
