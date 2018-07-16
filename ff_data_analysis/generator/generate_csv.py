@@ -17,3 +17,10 @@ def write_historical_rankings(data_frame, year=None):
 def write_historical_position_rankings(collection):
     for position in collection:
         collection[position].to_csv(('%s%s_data.csv' % (historical_dir_path, position.lower())), index=False)
+
+
+def write_consensus_rankings(data_frame, position=None):
+    if position:
+        data_frame.to_csv(('%s%s_rankings.csv' % (consensus_dir_path, position)), index=False)
+    else:
+        data_frame.to_csv(('%soverall_rankings.csv' % consensus_dir_path), index=False)

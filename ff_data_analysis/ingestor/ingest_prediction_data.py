@@ -132,5 +132,5 @@ def get_consensus_rankings(position=None):
     data_frame = drop_non_numeric(data_frame)
     data_frame = convert_column_types(data_frame, position)
     data_frame = data_frame[data_frame.Rank <= get_position_cutoffs(position)]
-    data_frame.to_csv('testoutput.csv', index=False)
+    gen.write_consensus_rankings(data_frame, position)
     return data_frame
