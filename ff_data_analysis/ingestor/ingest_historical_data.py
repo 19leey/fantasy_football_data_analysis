@@ -5,7 +5,7 @@ import pandas as pd
 
 
 #TODO: rename and standardize columns
-#TODO: fix dtypes - unecessary floats
+
 
 # constants
 undesireable_columns = ['PPR', 'DKPt', 'FDPt', 'VBD', 'OvRank']
@@ -19,7 +19,7 @@ def get_current_year():
     return dt.datetime.now().year
 
 
-def dtype_to_numeric(data_frame):
+def convert_column_types(data_frame):
     for column in data_frame:
         if column not in ['Name', 'Tm', 'FantPos']:
             data_frame[column] = pd.to_numeric(data_frame[column])
@@ -34,7 +34,7 @@ def get_historical_rankings(year=(get_current_year() - 1)):
     data_frame = data_frame.drop(undesireable_columns, axis=1)
     data_frame = data_frame.rename({'Unnamed: 1' : 'Name'}, axis='columns')
     data_frame = data_frame[data_frame.Rk != 'Rk']
-    data_frame = dtype_to_numeric(data_frame)
+    data_frame = convert_column_types(data_frame)
     #gen.write_historical_rankings(data_frame, year)
     return data_frame
 
@@ -61,5 +61,5 @@ def parse_by_player_position(data_frame):
     wr_data_frame = wr_data_frame[wr_te_columns].rename({'PosRank' : 'Rk'}, axis='columns')
     te_data_frame = te_data_frame[wr_te_columns].rename({'PosRank' : 'Rk'}, axis='columns')
     collection = {'QB' : qb_data_frame, 'RB' : rb_data_frame, 'WR' : wr_data_frame, 'TE' : te_data_frame}
-    #gen.write_position_rankings(collection)
+    #gen.write_historical_position_rankings(collection)
     return collection

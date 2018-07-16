@@ -14,5 +14,13 @@ Historical rankings data output:
 - ...
 
 
+Expert consensus rankings data is used for generating player tier projections.
+Data is pulled from: www.fantasypros.com
+
+Parsed expert consensus data formats:
+- Overall (QB, RB, WR, TE, K, DST)
+- By specific position
+
+
 ## R
 nothing here yet
