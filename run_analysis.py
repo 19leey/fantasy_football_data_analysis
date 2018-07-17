@@ -5,6 +5,9 @@ from ff_data_analysis.cluster import cluster_data as cd
 import argparse
 
 
+from ff_data_analysis.generator import render_tiers as gen
+
+
 parser = argparse.ArgumentParser()
 #parser.add_argument('points', help='list of points to be mapped')
 args = parser.parse_args()

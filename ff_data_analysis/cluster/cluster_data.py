@@ -70,7 +70,7 @@ def cluster_overall_rankings(data_frame):
 
         data_frame_slice = data_frame_slice.join(pd.DataFrame({'Tiers' : list(labels)}))
         slices[slice] = data_frame_slice
-    gen.write_clustered_consensus_rankings(slices)
+    #gen.write_clustered_consensus_rankings(slices)
     return slices
 
 
@@ -86,7 +86,7 @@ def cluster_position_rankings(data_frame, position):
     label_indexes = {}
     for index, label in zip(range(len(data_frame)), labels):
         label_indexes[label] = index
-        
+
     start = 0
     for label, new_label in zip(label_indexes, range(0, get_position_k_values(position))):
         end = (label_indexes[label] + 1)
@@ -95,5 +95,5 @@ def cluster_position_rankings(data_frame, position):
         new_label += 1
 
     data_frame = data_frame.join(pd.DataFrame({'Tiers' : list(labels)}))
-    gen.write_clustered_consensus_rankings(data_frame, position)
+    #gen.write_clustered_consensus_rankings(data_frame, position)
     return data_frame
