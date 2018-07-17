@@ -5,7 +5,7 @@ from ff_data_analysis.cluster import cluster_data as cd
 import argparse
 
 
-from ff_data_analysis.generator import render_tiers as gen
+from ff_data_analysis.generator import render_tiers as ren
 
 
 parser = argparse.ArgumentParser()
@@ -19,10 +19,12 @@ args = parser.parse_args()
 #position_data = hd.parse_by_player_position(historical_data)
 
 # consensus data
-overall_consensus_data = pd.get_consensus_rankings()
-cd.cluster_overall_rankings(overall_consensus_data)
-position_consensus_data = {}
-positions = ['qb', 'rb', 'wr', 'te', 'k', 'dst']
-for position in positions:
-    position_consensus_data[position] = pd.get_consensus_rankings(position)
-    cd.cluster_position_rankings(position_consensus_data[position], position)
+#overall_consensus_data = pd.get_consensus_rankings()
+#cd.cluster_overall_rankings(overall_consensus_data)
+#position_consensus_data = {}
+#positions = ['qb', 'rb', 'wr', 'te', 'k', 'dst']
+#for position in positions:
+#    position_consensus_data[position] = pd.get_consensus_rankings(position)
+#    cd.cluster_position_rankings(position_consensus_data[position], position)
+
+ren.run_rscript()

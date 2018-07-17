@@ -37,8 +37,8 @@ def get_position_cutoffs(position):
 
 def cluster_overall_rankings(data_frame):
     slices = {}
-    new_label = 0
-    data_frame = data_frame[data_frame.Rank <= 250]
+    new_label = 1
+    data_frame = data_frame[data_frame.Rank <= 200]
     for slice in range(1, 4):
         if slice is 1:
             data_frame_slice = data_frame[data_frame.Rank <= 50].reset_index(drop=True)
@@ -88,7 +88,7 @@ def cluster_position_rankings(data_frame, position):
         label_indexes[label] = index
 
     start = 0
-    for label, new_label in zip(label_indexes, range(0, get_position_k_values(position))):
+    for label, new_label in zip(label_indexes, range(1, (get_position_k_values(position) + 1))):
         end = (label_indexes[label] + 1)
         labels[start:end] = new_label
         start = end
