@@ -17,9 +17,9 @@ args = parser.parse_args()
 
 # consensus data
 overall_consensus_data = pd.get_consensus_rankings()
-#position_consensus_data = {}
-#positions = ['qb', 'rb', 'wr', 'te', 'k', 'dst']
-#for position in positions:
-#    position_consensus_data[position.upper()] = pd.get_consensus_rankings(position)
-
-X = cd.cluster_overall_test(overall_consensus_data)
+cd.cluster_overall_rankings(overall_consensus_data)
+position_consensus_data = {}
+positions = ['qb', 'rb', 'wr', 'te', 'k', 'dst']
+for position in positions:
+    position_consensus_data[position] = pd.get_consensus_rankings(position)
+    cd.cluster_position_rankings(position_consensus_data[position], position)

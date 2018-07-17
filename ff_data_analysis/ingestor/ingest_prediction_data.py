@@ -40,24 +40,6 @@ def get_position_columns(position=None):
         return overall_columns
 
 
-def get_position_cutoffs(position=None):
-    if position:
-        if position is 'qb':
-            return 50
-        elif position is 'rb':
-            return 100
-        elif position is 'wr':
-            return 100
-        elif position is 'te':
-            return 50
-        elif position is 'k':
-            return 25
-        elif position is 'dst':
-            return 25
-    else:
-        return 250
-
-
 def drop_non_numeric(data_frame):
     indexes = []
     for index, row in data_frame.iterrows():
@@ -72,17 +54,6 @@ def convert_column_types(data_frame, position=None):
         if column not in [get_position_columns(position)[1], 'Pos']:
             data_frame[column] = pd.to_numeric(data_frame[column])
     return data_frame
-
-
-def map_to_tiers(data_frame, position=None):
-    mapped_tiers = {}
-    for _, row in data_frame.iterrows():
-        if 'Tier' in row['Rank']:
-            tier = row['Rank']
-            mapped_tiers[tier] = []
-        else:
-            mapped_tiers[tier].append(row[get_position_columns(position)[1]])
-    return mapped_tiers
 
 
 def rename_columns(data_frame, position=None):
@@ -133,10 +104,8 @@ def get_html_data(position=None):
 def get_consensus_rankings(position=None):
     data_frame = get_html_data(position)
     data_frame = data_frame[get_position_columns(position)]
-    #mapped_tiers = map_to_tiers(data_frame, position)
     data_frame = drop_non_numeric(data_frame)
     data_frame = convert_column_types(data_frame, position)
-    data_frame = data_frame[data_frame.Rank <= get_position_cutoffs(position)]
     data_frame = rename_columns(data_frame, position)
-    #gen.write_consensus_rankings(data_frame, position)
+    #gen.write_raw_consensus_rankings(data_frame, position)
     return data_frame
