@@ -9,13 +9,13 @@ import re
 
 
 # constants
-overall_columns = ['Rank', 'Overall (Team)', 'Pos', 'Best', 'Worst', 'Avg']
-qb_columns = ['Rank', 'Quarterbacks (Team)', 'Best', 'Worst', 'Avg']
-rb_columns = ['Rank', 'Running Backs (Team)', 'Best', 'Worst', 'Avg']
-wr_columns = ['Rank', 'Wide Receivers (Team)', 'Best', 'Worst', 'Avg']
-te_columns = ['Rank', 'Tight Ends (Team)', 'Best', 'Worst', 'Avg']
-k_columns = ['Rank', 'Kickers (Team)', 'Best', 'Worst', 'Avg']
-dst_columns = ['Rank', 'Team DST', 'Best', 'Worst', 'Avg']
+overall_columns = ['Rank', 'Overall (Team)', 'Pos', 'Best', 'Worst', 'Avg', 'Std Dev']
+qb_columns = ['Rank', 'Quarterbacks (Team)', 'Best', 'Worst', 'Avg', 'Std Dev']
+rb_columns = ['Rank', 'Running Backs (Team)', 'Best', 'Worst', 'Avg', 'Std Dev']
+wr_columns = ['Rank', 'Wide Receivers (Team)', 'Best', 'Worst', 'Avg', 'Std Dev']
+te_columns = ['Rank', 'Tight Ends (Team)', 'Best', 'Worst', 'Avg', 'Std Dev']
+k_columns = ['Rank', 'Kickers (Team)', 'Best', 'Worst', 'Avg', 'Std Dev']
+dst_columns = ['Rank', 'Team DST', 'Best', 'Worst', 'Avg', 'Std Dev']
 
 
 def get_current_date():
@@ -55,7 +55,7 @@ def get_position_cutoffs(position=None):
         elif position is 'dst':
             return 25
     else:
-        return 200
+        return 250
 
 
 def drop_non_numeric(data_frame):
@@ -83,6 +83,11 @@ def map_to_tiers(data_frame, position=None):
         else:
             mapped_tiers[tier].append(row[get_position_columns(position)[1]])
     return mapped_tiers
+
+
+def rename_columns(data_frame, position=None):
+    data_frame = data_frame.rename({get_position_columns(position)[1] : 'Name'}, axis='columns')
+    return data_frame
 
 
 def get_html_data(position=None):
@@ -128,9 +133,10 @@ def get_html_data(position=None):
 def get_consensus_rankings(position=None):
     data_frame = get_html_data(position)
     data_frame = data_frame[get_position_columns(position)]
-    mapped_tiers = map_to_tiers(data_frame, position)
+    #mapped_tiers = map_to_tiers(data_frame, position)
     data_frame = drop_non_numeric(data_frame)
     data_frame = convert_column_types(data_frame, position)
     data_frame = data_frame[data_frame.Rank <= get_position_cutoffs(position)]
-    gen.write_consensus_rankings(data_frame, position)
+    data_frame = rename_columns(data_frame, position)
+    #gen.write_consensus_rankings(data_frame, position)
     return data_frame
