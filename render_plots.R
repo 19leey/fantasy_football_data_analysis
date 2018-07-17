@@ -45,7 +45,7 @@ get_title <- function(position) {
 render_tiers <- function(file_path, position) {
   if (missing(position)) {
     df <- read.csv(file_path)
-    x_min = (min(df$Rank) - 20)
+    x_min = (min(df$Avg) - 20)
     if (x_min < 0) {
       x_min = -5
     }
@@ -83,13 +83,13 @@ run_script <- function() {
   slice_index = 1
   for (slice in overall) {
     filename <- sprintf("%soverall_rankings_%s.png", plots_dir_path, slice_index)
-    ggsave(filename, plot=render_tiers(slice), width=320, height=230, units="mm")
+    ggsave(filename, plot=render_tiers(slice), width=350, height=230, units="mm")
     slice_index = slice_index + 1
   }
 
   for (file in get_positions()) {
     filename <- sprintf("%s%s_rankings.png", plots_dir_path, file[1])
-    ggsave(filename, plot=render_tiers(file[2], file[1]), width=320, height=230, units="mm")
+    ggsave(filename, plot=render_tiers(file[2], file[1]), width=350, height=230, units="mm")
   }
 }
 
