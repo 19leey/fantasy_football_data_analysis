@@ -25,8 +25,6 @@ def convert_column_types(data_frame):
             data_frame[column] = pd.to_numeric(data_frame[column])
     return data_frame
 
-#Rk,Name,Tm,FantPos,Age,G,GS,Cmp,Att,Yds,TD,Int,Att.1,Yds.1,Y/A,TD.1,Tgt,Rec,Yds.2,Y/R,TD.2,FantPt,PosRank
-
 
 def convert_column_names(data_frame):
     data_frame = data_frame.rename({'Rk' : 'Rank'}, axis='columns')
